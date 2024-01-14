@@ -1,3 +1,6 @@
 export default {
-    '*.{js,ts}': ['eslint --report-unused-disable-directives --fix', 'prettier --write'],
+    '*.{html,css,scss,postcss,json,svelte}': [
+        'prettier --write --plugin prettier-plugin-svelte --plugin @ianvs/prettier-plugin-sort-imports',
+    ],
+    '*.{js,ts}': ['prettier --write', 'eslint --report-unused-disable-directives --fix'],
 };
