@@ -1,0 +1,38 @@
+version: '3.8'
+
+services:
+  catalog:
+    container_name: learning-resources_container
+    hostname: learning-resources.dev
+    user: vscode
+    init: true
+    env_file:
+      - .env
+    build:
+      context: .
+      dockerfile: Dockerfile
+      args:
+        SHELL: ${SHELL:-zsh}
+        OS_VARIANT: ${OS_VARIANT:--bullseye}
+        PNPM_HOME: ${PNPM_HOME}
+    volumes:
+      # Redirecciona el socket del Docker local al contenedor
+      - /var/run/docker.sock:/var/run/docker-host.sock
+      # Se usa un volumen con nombre para el código fuente
+      - ..:/workspaces/learning-resources:cached
+      # Persiste las extensiones de VS Code entre las reconstrucciones del devcontainer
+      - vscode-extensions:/root/.vscode-server/extensions
+      # Persiste también las extensiones de VS Code Insiders
+      - vscode-extensions-insiders:/root/.vscode-server-insiders/extensions
+    networks:
+      - voting-system-net
+    command: sleep infinity
+
+volumes:
+  vscode-extensions:
+    name: learning-resources-vscode-extensions
+  vscode-extensions-insiders:
+    name: learning-resources-vscode-insiders-extensions
+
+networks:
+  voting-system-net:
