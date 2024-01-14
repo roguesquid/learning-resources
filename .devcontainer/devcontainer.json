@@ -30,9 +30,7 @@
         "ghcr.io/devcontainers-contrib/features/pnpm:2": {}
     },
     "onCreateCommand": "sudo chmod a+x ./.devcontainer/scripts/install.sh && ./.devcontainer/scripts/install.sh",
-    "forwardPorts": [
-        5173
-    ],
+    "forwardPorts": [5173],
     "portsAttributes": {
         "5173": {
             "label": "SvelteKit App",
@@ -43,11 +41,7 @@
         "vscode": {
             // Set *default* container specific settings.json values on container create.
             "settings": {
-                "colorize.include": [
-                    "**/*.css",
-                    "**/*.scss",
-                    "**/*.postcss"
-                ],
+                "colorize.include": ["**/*.css", "**/*.scss", "**/*.postcss"],
                 "debug.javascript.autoAttachFilter": "disabled",
                 "editor.defaultFormatter": "esbenp.prettier-vscode",
                 "editor.formatOnSave": true,
@@ -134,12 +128,7 @@
                     "editor.inlineSuggest.enabled": true,
                     "tailwindCSS.validate": true,
                     "template-string-converter.enable": true,
-                    "template-string-converter.validLanguages": [
-                        "javascript",
-                        "typescript",
-                        "svelte",
-                        "html"
-                    ],
+                    "template-string-converter.validLanguages": ["javascript", "typescript", "svelte", "html"],
                     "template-string-converter.autoRemoveTemplateString": true
                 }
             },
