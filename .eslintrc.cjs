@@ -9,6 +9,7 @@ module.exports = {
 	],
 	parser: '@typescript-eslint/parser',
 	plugins: ['@typescript-eslint'],
+    ignorePatterns: ['*.cjs'],
 	parserOptions: {
 		sourceType: 'module',
 		ecmaVersion: 2020,
@@ -26,7 +27,6 @@ module.exports = {
 		es2017: true,
 		node: true
 	},
-    ignorePatterns: ['*.cjs'],
     rules: {
         '@typescript-eslint/interface-name-prefix': 'off',
         '@typescript-eslint/explicit-function-return-type': 'off',
