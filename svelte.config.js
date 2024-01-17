@@ -1,6 +1,6 @@
 import path, { resolve } from 'node:path';
 import { fileURLToPath } from 'url';
-import adapter from '@sveltejs/adapter-auto';
+import adapter from '@sveltejs/adapter-node';
 import { vitePreprocess } from '@sveltejs/vite-plugin-svelte';
 import autoprefixer from 'autoprefixer';
 import postcssNested from 'postcss-nested';
@@ -25,7 +25,7 @@ const config = {
             publicPrefix: 'APP_',
         },
         alias: {
-            $components: 'src/components',
+            $components: 'src/lib/components',
             $stores: 'src/lib/stores',
         },
     },
