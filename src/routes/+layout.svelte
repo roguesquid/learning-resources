@@ -4,7 +4,6 @@
     import AppHeader from '$components/AppHeader.svelte';
     import FilterBar from '$components/filter-bar/FilterBar.svelte';
     import SearchBar from '$components/SearchBar.svelte';
-
 </script>
 
 <div class="app-container">

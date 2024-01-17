@@ -1,7 +1,7 @@
 {
     "name": "learning-resources",
     "displayName": "Catálogo de recursos de aprendizaje del CEL",
-    "version": "0.0.9",
+    "version": "0.1.0",
     "description": "Catálogo de recursos de aprendizaje del Centro de Estudios en Línea (CEL) de la Universidad Católica Andrés Bello (UCAB)",
     "private": true,
     "license": "UNLICENSED",
@@ -28,6 +28,7 @@
         "@popperjs/core": "^2.11.8",
         "@sveltejs/adapter-auto": "^3.1.0",
         "@sveltejs/adapter-node": "^3.0.0",
+        "@sveltejs/adapter-vercel": "^4.0.5",
         "@sveltejs/kit": "^2.3.2",
         "@sveltejs/vite-plugin-svelte": "^3.0.1",
         "@sveltejs/vite-plugin-svelte-inspector": "^2.0.0",

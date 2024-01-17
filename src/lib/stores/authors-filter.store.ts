@@ -1,7 +1,4 @@
-import {
-    writable,
-    type Writable,
-} from 'svelte/store';
+import { writable, type Writable } from 'svelte/store';
 
 export function authorsFilterStore(): Writable<string[]> {
     const store = writable<string[]>([]);

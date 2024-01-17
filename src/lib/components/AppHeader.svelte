@@ -1,6 +1,5 @@
 <script lang="ts">
-    import { Button, DarkMode, Navbar, NavBrand } from 'flowbite-svelte';
-    import { AdjustmentsHorizontalOutline } from 'flowbite-svelte-icons';
+    import { DarkMode, Navbar, NavBrand } from 'flowbite-svelte';
 
     export let title: string = 'Universidad Católica Andrés Bello';
 </script>

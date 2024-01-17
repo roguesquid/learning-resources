@@ -1,6 +1,6 @@
 import path, { resolve } from 'node:path';
 import { fileURLToPath } from 'url';
-import adapter from '@sveltejs/adapter-node';
+import adapter from '@sveltejs/adapter-vercel';
 import { vitePreprocess } from '@sveltejs/vite-plugin-svelte';
 import autoprefixer from 'autoprefixer';
 import postcssNested from 'postcss-nested';

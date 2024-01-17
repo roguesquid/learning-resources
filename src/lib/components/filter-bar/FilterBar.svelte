@@ -1,20 +1,19 @@
-
-
-            <script>
+<script>
     import { Accordion, AccordionItem, Heading } from 'flowbite-svelte';
     import { ChevronDoubleDownOutline, ChevronDoubleUpOutline } from 'flowbite-svelte-icons';
-    import TagsFilter from './TagsFilter.svelte';
+
     import AuthorsFilter from './AuthorsFilter.svelte';
     import LanguagesFilter from './LanguagesFilter.svelte';
     import SponsorsFilter from './SponsorsFilter.svelte';
+    import TagsFilter from './TagsFilter.svelte';
     import TermsFilter from './TermsFilter.svelte';
 </script>
 
-        <Heading
-            tag="h5"
-            id="drawer-label"
-            class="px-4 py-2 mb-2 inline-flex items-center text-base font-semibold uppercase text-gray-500 dark:text-gray-400 "
-            >Filtros</Heading>
+<Heading
+    tag="h5"
+    id="drawer-label"
+    class="mb-2 inline-flex items-center px-4 py-2 text-base font-semibold uppercase text-gray-500 dark:text-gray-400 "
+    >Filtros</Heading>
 
 <Accordion multiple flush>
     <AccordionItem class="px-4" paddingFlush="py-2">
