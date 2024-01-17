@@ -1,7 +1,7 @@
 {
     "name": "learning-resources",
     "displayName": "Catálogo de recursos de aprendizaje del CEL",
-    "version": "0.0.1",
+    "version": "0.0.9",
     "description": "Catálogo de recursos de aprendizaje del Centro de Estudios en Línea (CEL) de la Universidad Católica Andrés Bello (UCAB)",
     "private": true,
     "license": "UNLICENSED",
