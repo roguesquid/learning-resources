@@ -15,6 +15,7 @@ module.exports = {
     trailingComma: 'all',
     plugins: ['prettier-plugin-svelte', 'prettier-plugin-tailwindcss', '@ianvs/prettier-plugin-sort-imports'],
     singleAttributePerLine: false,
+    tailwindAttributes: ['sectionClass'],
     importOrderParserPlugins: ['typescript', 'classProperties', 'importAttributes', 'decorators-legacy'],
     importOrderTypeScriptVersion: '5.3.3',
     importOrder: [
