@@ -14,7 +14,7 @@ services:
       args:
         SHELL: ${SHELL:-zsh}
         OS_VARIANT: ${OS_VARIANT:--bullseye}
-        PNPM_HOME: ${PNPM_HOME}
+        PNPM_HOME: ${PNPM_HOME:-/usr/local/share/pnpm}
     volumes:
       # Redirecciona el socket del Docker local al contenedor
       - /var/run/docker.sock:/var/run/docker-host.sock
