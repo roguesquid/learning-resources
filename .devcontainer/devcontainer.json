@@ -2,7 +2,7 @@
     "name": "CEL Learning Resources Catalog",
     "dockerComposeFile": "docker-compose.yml",
     "service": "catalog",
-    "workspaceFolder": "/workspaces/${localWorkspaceFolderBasename}",
+    "workspaceFolder": "/workspaces/learning-resources",
     "remoteUser": "vscode",
     "remoteEnv": {
         "LOCAL_WORKSPACE_FOLDER": "${localWorkspaceFolder}"
@@ -29,7 +29,7 @@
         "ghcr.io/devcontainers/features/github-cli:1": {},
         "ghcr.io/devcontainers-contrib/features/pnpm:2": {}
     },
-    "onCreateCommand": "sudo chmod a+x ./.devcontainer/scripts/install.sh && ./.devcontainer/scripts/install.sh",
+    "postCreateCommand": "./.devcontainer/scripts/install.sh",
     "forwardPorts": [5173],
     "portsAttributes": {
         "5173": {
