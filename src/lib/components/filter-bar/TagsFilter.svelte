@@ -36,5 +36,3 @@
 </script>
 
 <MultiSelect items="{tags}" bind:value="{$tagsFilter}" size="sm" />
-
-<pre>{JSON.stringify($tagsFilter)}</pre>

@@ -8,6 +8,8 @@ const search = async (searchTerm: string) => {
     if (searchTerm !== '') {
         const { data, error } = await supabase.rpc('search', { term_to_search: searchTerm });
 
+        console.log(data);
+
         results = data ?? [];
 
         if (error) {

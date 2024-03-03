@@ -15,7 +15,7 @@
             placeholder="Buscar recurso de aprendizaje"
             name="search"
             bind:value="{$searchTerm}" />
-        <Button class="!p-2.5">
+        <Button type="submit" class="!p-2.5">
             <SearchOutline class="h-4 w-5 outline-none" />
         </Button>
     </form>
@@ -23,7 +23,7 @@
 
 <style lang="postcss">
     .searchbar {
-        @apply flex h-full w-full flex-col items-start justify-center border-b border-b-gray-300 px-4 pt-20 dark:border-b-gray-700 dark:bg-gray-800;
+        @apply flex h-full w-full flex-col items-start justify-center border-b border-b-gray-300 px-4 dark:border-b-gray-700;
     }
 
     .searchbar-form {

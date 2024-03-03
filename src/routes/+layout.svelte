@@ -21,10 +21,10 @@
 
 <style lang="postcss">
     .app-container {
-        @apply grid h-full w-full grid-flow-row-dense content-center justify-center justify-items-start gap-0;
+        @apply grid h-full w-full grid-flow-row-dense content-center justify-center justify-items-start gap-0 dark:bg-gray-800;
 
-        grid-template-columns: 20rem 1fr;
-        grid-template-rows: 9rem 1fr;
+        grid-template-columns: 16rem 1fr;
+        grid-template-rows: 8rem 1fr;
         grid-template-areas:
             'app-header app-header'
             'app-sidebar app-main-content';
@@ -32,7 +32,7 @@
 
     .app-header {
         grid-area: app-header;
-        @apply w-full self-stretch;
+        @apply flex w-full flex-col self-stretch;
     }
 
     .app-sidebar {
@@ -42,6 +42,6 @@
 
     .app-main-content {
         grid-area: app-main-content;
-        @apply w-full self-stretch overflow-y-auto pt-1 scrollbar scrollbar-track-zinc-200 scrollbar-thumb-zinc-400 scrollbar-corner-zinc-300 dark:scrollbar-track-slate-800 dark:scrollbar-thumb-slate-600 dark:scrollbar-corner-slate-700;
+        @apply w-full self-stretch overflow-y-auto scrollbar scrollbar-track-zinc-200 scrollbar-thumb-zinc-400 scrollbar-corner-zinc-300 dark:scrollbar-track-slate-800 dark:scrollbar-thumb-slate-600 dark:scrollbar-corner-slate-700;
     }
 </style>

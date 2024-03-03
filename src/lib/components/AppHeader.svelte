@@ -5,7 +5,7 @@
 </script>
 
 <!-- <div class="relative"> -->
-<Navbar class="fixed w-full border-b border-b-gray-300 p-[1.38rem]" fluid="{true}">
+<Navbar class="w-full border-b border-b-gray-300 p-4 dark:bg-gray-800" fluid="{true}">
     <NavBrand href="/">
         <img
             src="/images/ucab.svg"

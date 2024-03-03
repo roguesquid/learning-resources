@@ -10,10 +10,7 @@
 
 {#if results}
     <div class="results">
-        <!-- {JSON.stringify($results)} -->
-
-        <br />
-        <p class="mb-4 border-b border-b-gray-300 p-2 dark:border-b-gray-700">
+        <p class="border-b border-b-gray-300 p-2 dark:border-b-gray-700">
             {#if results}
                 {results.length} resultado(s) encontrado(s) bajo el término de búsqueda <em>{$searchTerm}</em>.
             {:else}
