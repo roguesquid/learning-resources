@@ -1,5 +1,6 @@
 <script lang="ts">
     import { Badge } from 'flowbite-svelte';
+    import { SearchOutline } from 'flowbite-svelte-icons';
 
     import { _results, searchTerm } from '$lib/stores/search.store';
 
@@ -21,7 +22,9 @@
             <section class="entry">
                 <h6>{entry.subject_code}: {entry.subject_name}</h6>
                 <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
-                    {entry.unit} - {entry.name}
+                    <a class="hover:underline" href="/{entry.learning_object_id}">
+                        {entry.unit} - {entry.name}
+                    </a>
                 </h5>
                 <p class="font-normal leading-tight text-gray-700 dark:text-gray-400">
                     {entry.objective}
@@ -33,7 +36,14 @@
         {/each}
     </div>
 {:else}
-    <p class="p-4">No hay resultados para mostrar&hellip;</p>
+    <div class="flex h-full w-full items-center justify-center">
+        <div class="flex flex-col items-center">
+            <SearchOutline class="mb-4 h-24 w-24" />
+            <h3 class="select-none text-center text-xl">
+                Prueba a buscar un recurso de aprendizaje <br /> en la barra de b&uacute;squeda
+            </h3>
+        </div>
+    </div>
 {/if}
 
 <style lang="postcss">
@@ -42,6 +52,6 @@
     }
 
     .entry {
-        @apply w-full flex-col gap-2 border-b border-b-gray-300 px-4 pb-4 dark:border-b-gray-700;
+        @apply w-full flex-col gap-2 border-b border-b-gray-300 px-4 pb-4 pt-3 dark:border-b-gray-700;
     }
 </style>
