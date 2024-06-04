@@ -2,11 +2,22 @@
     import { Badge } from 'flowbite-svelte';
     import { SearchOutline } from 'flowbite-svelte-icons';
 
+    import { authorsFilterStore } from '$lib/stores/authors-filter.store';
     import { _results, searchTerm } from '$lib/stores/search.store';
 
     export let form;
 
-    $: results = form?.value;
+    let results = [];
+
+    $: {
+        results = form?.value;
+        const authorsFilter = $authorsFilterStore;
+        if (authorsFilter.length > 0) {
+            results = results?.filter((entry) =>
+                authorsFilter.includes(`${entry.author_first_name} ${entry.author_last_name}`),
+            );
+        }
+    }
 </script>
 
 {#if results}

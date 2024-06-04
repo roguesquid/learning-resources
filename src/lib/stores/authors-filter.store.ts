@@ -1,6 +1,6 @@
 import { writable, type Writable } from 'svelte/store';
 
-export function authorsFilterStore(): Writable<string[]> {
+export function authorsFilterStoree(): Writable<string[]> {
     const store = writable<string[]>([]);
 
     const set = (value: string[]) => {
@@ -13,3 +13,5 @@ export function authorsFilterStore(): Writable<string[]> {
         update: () => {},
     };
 }
+
+export const authorsFilterStore = authorsFilterStoree();

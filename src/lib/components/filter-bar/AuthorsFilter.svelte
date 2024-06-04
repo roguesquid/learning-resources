@@ -4,6 +4,7 @@
     import { MultiSelect } from 'flowbite-svelte';
 
     import { supabase } from '$lib/supabase-client';
+    import { authorsFilterStore } from '$stores/authors-filter.store';
 
     let selected: Array<string> = [];
     let authors: Array<{ value: string; name: string }> = [];
@@ -17,6 +18,13 @@
     onMount(() => {
         load();
     });
+
+    $: {
+        const selectedAuthors = authors.filter((author) => selected.includes(author.value));
+        const selectedNames = selectedAuthors.map((author) => author.name);
+        authorsFilterStore.set(selectedNames);
+        console.log($authorsFilterStore);
+    }
 </script>
 
 <MultiSelect items="{authors}" bind:value="{selected}" size="sm" />
