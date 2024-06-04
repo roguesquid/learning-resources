@@ -1,14 +1,14 @@
 <script lang="ts">
-    import { Badge } from 'flowbite-svelte';
+    import { Badge, Spinner } from 'flowbite-svelte';
     import { SearchOutline } from 'flowbite-svelte-icons';
 
     import { authorsFilterStore } from '$lib/stores/authors-filter.store';
+    import { isLoading } from '$lib/stores/isLoading.store';
     import { _results, searchTerm } from '$lib/stores/search.store';
 
     export let form;
 
     let results = [];
-
     $: {
         results = form?.value;
         const authorsFilter = $authorsFilterStore;
@@ -17,6 +17,8 @@
                 authorsFilter.includes(`${entry.author_first_name} ${entry.author_last_name}`),
             );
         }
+
+        $isLoading = false;
     }
 </script>
 
@@ -45,6 +47,11 @@
                 <!-- <pre>{JSON.stringify(entry, null, 2)}</pre> -->
             </section>
         {/each}
+    </div>
+{:else if !results && $isLoading}
+    <div class="flex h-full w-full flex-col items-center justify-center">
+        <Spinner color="gray" size="12" class="mb-3" />
+        <p>Cargando...</p>
     </div>
 {:else}
     <div class="flex h-full w-full items-center justify-center">

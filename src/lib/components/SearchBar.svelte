@@ -4,7 +4,12 @@
 
     import { enhance } from '$app/forms';
 
+    import { isLoading } from '$lib/stores/isLoading.store';
     import { searchTerm } from '$lib/stores/search.store';
+
+    function handleSearchClick() {
+        $isLoading = true;
+    }
 </script>
 
 <nav class="searchbar">
@@ -15,7 +20,7 @@
             placeholder="Buscar recurso de aprendizaje"
             name="search"
             bind:value="{$searchTerm}" />
-        <Button type="submit" class="!p-2.5">
+        <Button type="submit" class="!p-2.5" on:click="{handleSearchClick}">
             <SearchOutline class="h-4 w-5 outline-none" />
         </Button>
     </form>
