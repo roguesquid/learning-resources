@@ -14,7 +14,6 @@ const search = async (searchTerm: string) => {
             throw error;
         }
     }
-
     return results;
 };
 

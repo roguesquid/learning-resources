@@ -4,6 +4,7 @@
 
     import { authorsFilterStore } from '$lib/stores/authors-filter.store';
     import { isLoading } from '$lib/stores/isLoading.store';
+    import { languageFilterStore } from '$lib/stores/language-filter.store';
     import { _results, searchTerm } from '$lib/stores/search.store';
 
     export let form;
@@ -12,11 +13,14 @@
     $: {
         results = form?.value;
         const authorsFilter = $authorsFilterStore;
+        const languageFilter = $languageFilterStore;
         if (authorsFilter.length > 0) {
             results = results?.filter((entry) =>
                 authorsFilter.includes(`${entry.author_first_name} ${entry.author_last_name}`),
             );
         }
+
+        results = results?.filter((entry) => languageFilter.includes(entry.language));
 
         $isLoading = false;
     }

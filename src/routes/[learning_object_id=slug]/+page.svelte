@@ -2,8 +2,6 @@
     import { A, Badge, Breadcrumb, BreadcrumbItem, Heading, Indicator, P } from 'flowbite-svelte';
     import { ClockSolid, DollarOutline, FileCheckOutline } from 'flowbite-svelte-icons';
 
-    import { page } from '$app/stores';
-
     import type { PageData } from './$types';
 
     export let data: PageData;

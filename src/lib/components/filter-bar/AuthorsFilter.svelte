@@ -23,7 +23,6 @@
         const selectedAuthors = authors.filter((author) => selected.includes(author.value));
         const selectedNames = selectedAuthors.map((author) => author.name);
         authorsFilterStore.set(selectedNames);
-        console.log($authorsFilterStore);
     }
 </script>
 
