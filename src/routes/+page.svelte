@@ -70,7 +70,7 @@
     </div>
 {:else if !results && $isLoading}
     <div class="flex h-full w-full flex-col items-center justify-center">
-        <Spinner color="gray" size="12" class="mb-3" />
+        <Spinner color="gray" size="8" class="mb-3" />
         <p>Cargando...</p>
     </div>
 {:else}
