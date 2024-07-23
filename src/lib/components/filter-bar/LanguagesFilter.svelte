@@ -3,6 +3,9 @@
 
     import { languageFilterStore } from '$stores/language-filter.store';
 
+    // Por defecto siempre pone el español porque sino aparece vacía la búsqueda
+    $languageFilterStore = [...$languageFilterStore, 'Español'];
+
     function toggleLanguage(lang: string, event: Event) {
         let checkbox = event.target as HTMLInputElement;
         if (checkbox.checked && !$languageFilterStore.includes(lang)) {

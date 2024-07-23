@@ -16,7 +16,7 @@
     >Filtros</Heading>
 
 <Accordion multiple flush>
-    <AccordionItem class="px-4" paddingFlush="py-2">
+    <!-- <AccordionItem class="px-4" paddingFlush="py-2">
         <span slot="header">Palabras Clave</span>
         <div slot="arrowup">
             <ChevronDoubleUpOutline class="-me-0.5 h-3 w-3" />
@@ -27,7 +27,7 @@
         <p class="px-4 text-gray-500 dark:text-gray-400">
             <TagsFilter />
         </p>
-    </AccordionItem>
+    </AccordionItem> -->
     <AccordionItem class="px-4" paddingFlush="py-2">
         <span slot="header">Autores</span>
         <div slot="arrowup">

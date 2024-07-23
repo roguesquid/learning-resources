@@ -6,6 +6,8 @@
     import { isLoading } from '$lib/stores/isLoading.store';
     import { languageFilterStore } from '$lib/stores/language-filter.store';
     import { _results, searchTerm } from '$lib/stores/search.store';
+    import { sponsorFilterStore } from '$stores/sponsors.store.js';
+    import { termFilterStore } from '$stores/term-filter.store.js';
 
     export let form;
 
@@ -14,13 +16,27 @@
         results = form?.value;
         const authorsFilter = $authorsFilterStore;
         const languageFilter = $languageFilterStore;
+        const sponsorFilter = $sponsorFilterStore;
+        const termFilter = $termFilterStore;
+
+        //Filtro de autores
         if (authorsFilter.length > 0) {
             results = results?.filter((entry) =>
                 authorsFilter.includes(`${entry.author_first_name} ${entry.author_last_name}`),
             );
         }
 
+        //Filtro de idioma
         results = results?.filter((entry) => languageFilter.includes(entry.language));
+
+        //Filtro de Sponsors
+        //Como no estoy recibiendo los sponsors en el arreglo de resultados no lo puedo filtrar por ahora
+        if (!sponsorFilter.includes('CEL')) {
+            results = [];
+        }
+
+        // Filtro de TERMS
+        results = results?.filter((entry) => termFilter.includes(entry.term_name));
 
         $isLoading = false;
     }
