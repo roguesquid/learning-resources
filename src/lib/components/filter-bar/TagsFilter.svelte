@@ -3,33 +3,17 @@
 
     import { MultiSelect } from 'flowbite-svelte';
 
-    import { supabase } from '$lib/supabase-client';
     import { tagsFilter } from '$stores/search.store';
 
-    let tags: Array<{ value: string; name: string }> = [];
+    let tags: Array<{ value: number; name: string }> = [];
 
     const load = async () => {
-        const { data } = await supabase.from('tags').select();
+        const response = await fetch('http://localhost:8000/wp-json/wp/v2/tag_p?_fields=name,id');
+
+        const data = await response.json();
 
         tags = data?.map((tag) => ({ value: tag.id, name: tag.name.toLocaleUpperCase() })) ?? [];
     };
-
-    // const filter = async (searchTerm: string) => {
-    //     let results = [];
-
-    //     if (searchTerm !== '') {
-    //         const { data, error } = await supabase.rpc('search', { term_to_search: searchTerm });
-
-    //         results = data ?? [];
-
-    //         if (error) {
-    //             throw error;
-    //         }
-    //     }
-
-    //     return results;
-    // };
-
     onMount(() => {
         load();
     });

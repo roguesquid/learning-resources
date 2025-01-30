@@ -1,24 +1,40 @@
 <script lang="ts">
+    import { onMount } from 'svelte';
+
     import { Checkbox } from 'flowbite-svelte';
 
     import { languageFilterStore } from '$stores/language-filter.store';
 
-    // Por defecto siempre pone el español porque sino aparece vacía la búsqueda
-    $languageFilterStore = [...$languageFilterStore, 'Español'];
+    let languages = [];
 
-    function toggleLanguage(lang: string, event: Event) {
-        let checkbox = event.target as HTMLInputElement;
-        if (checkbox.checked && !$languageFilterStore.includes(lang)) {
-            $languageFilterStore = [...$languageFilterStore, lang];
-        } else if (!checkbox.checked && $languageFilterStore.includes(lang)) {
-            $languageFilterStore = $languageFilterStore.filter((l) => l !== lang);
+    const load = async () => {
+        const response = await fetch('http://localhost:8000/wp-json/wp/v2/lenguaje?_fields=name,id');
+
+        const data = await response.json();
+
+        languages = data?.map((language) => ({ value: language.id, name: language.name.toLocaleUpperCase() })) ?? [];
+        $languageFilterStore = languages.map((language) => String(language.value));
+    };
+    onMount(() => {
+        load();
+    });
+
+    function handleCheckboxChange(event) {
+        const { checked, value } = event.target;
+        if (checked) {
+            $languageFilterStore = [...$languageFilterStore, value];
+        } else {
+            $languageFilterStore = $languageFilterStore.filter((language) => language !== value);
         }
     }
 </script>
 
 <section class="filter-content">
-    <Checkbox checked on:change="{(e) => toggleLanguage('Español', e)}">Español</Checkbox>
-    <Checkbox on:change="{(e) => toggleLanguage('Inglés', e)}">Inglés</Checkbox>
+    {#each languages as language}
+        <Checkbox value="{language.value}" checked on:change="{handleCheckboxChange}">
+            {language.name}
+        </Checkbox>
+    {/each}
 </section>
 
 <style lang="postcss">

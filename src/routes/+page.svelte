@@ -2,42 +2,14 @@
     import { Badge, Spinner } from 'flowbite-svelte';
     import { SearchOutline } from 'flowbite-svelte-icons';
 
-    import { authorsFilterStore } from '$lib/stores/authors-filter.store';
     import { isLoading } from '$lib/stores/isLoading.store';
-    import { languageFilterStore } from '$lib/stores/language-filter.store';
     import { _results, searchTerm } from '$lib/stores/search.store';
-    import { sponsorFilterStore } from '$stores/sponsors.store.js';
-    import { termFilterStore } from '$stores/term-filter.store.js';
 
     export let form;
 
     let results = [];
     $: {
         results = form?.value;
-        const authorsFilter = $authorsFilterStore;
-        const languageFilter = $languageFilterStore;
-        const sponsorFilter = $sponsorFilterStore;
-        const termFilter = $termFilterStore;
-
-        //Filtro de autores
-        if (authorsFilter.length > 0) {
-            results = results?.filter((entry) =>
-                authorsFilter.includes(`${entry.author_first_name} ${entry.author_last_name}`),
-            );
-        }
-
-        //Filtro de idioma
-        results = results?.filter((entry) => languageFilter.includes(entry.language));
-
-        //Filtro de Sponsors
-        //Como no estoy recibiendo los sponsors en el arreglo de resultados no lo puedo filtrar por ahora
-        if (!sponsorFilter.includes('CEL')) {
-            results = [];
-        }
-
-        // Filtro de TERMS
-        results = results?.filter((entry) => termFilter.includes(entry.term_name));
-
         $isLoading = false;
     }
 </script>
@@ -53,16 +25,17 @@
         </p>
         {#each results as entry}
             <section class="entry">
-                <h6>{entry.subject_code}: {entry.subject_name}</h6>
+                <h6>{entry.title}</h6>
                 <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
-                    <a class="hover:underline" href="/{entry.learning_object_id}">
+                    <a class="hover:underline" href="{entry.link}">
                         {entry.unit} - {entry.name}
                     </a>
                 </h5>
                 <p class="font-normal leading-tight text-gray-700 dark:text-gray-400">
                     {entry.objective}
                 </p>
-                <p><b>Autor:</b> {entry.author_last_name}, {entry.author_first_name}</p>
+                <p><b>Autor:</b> {entry.author.join(', ')}</p>
+                <!-- Now contains author names -->
                 <p><Badge border>{entry.year}</Badge></p>
                 <!-- <pre>{JSON.stringify(entry, null, 2)}</pre> -->
             </section>
