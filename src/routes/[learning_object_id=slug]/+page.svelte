@@ -2,12 +2,8 @@
     import { A, Badge, Breadcrumb, BreadcrumbItem, Heading, Indicator, P, Spinner } from 'flowbite-svelte';
     import { ClockSolid, DollarOutline, FileCheckOutline } from 'flowbite-svelte-icons';
 
-    import { authorsFilterStore } from '$lib/stores/authors-filter.store';
     import { isLoading } from '$lib/stores/isLoading.store';
-    import { languageFilterStore } from '$lib/stores/language-filter.store';
     import { _results, searchTerm } from '$lib/stores/search.store';
-    import { sponsorFilterStore } from '$stores/sponsors.store.js';
-    import { termFilterStore } from '$stores/term-filter.store.js';
 
     import type { PageData } from './$types';
 
@@ -18,30 +14,6 @@
     let results = [];
     $: {
         results = form?.value;
-        const authorsFilter = $authorsFilterStore;
-        const languageFilter = $languageFilterStore;
-        const sponsorFilter = $sponsorFilterStore;
-        const termFilter = $termFilterStore;
-
-        //Filtro de autores
-        if (authorsFilter.length > 0) {
-            results = results?.filter((entry) =>
-                authorsFilter.includes(`${entry.author_first_name} ${entry.author_last_name}`),
-            );
-        }
-
-        //Filtro de idioma
-        results = results?.filter((entry) => languageFilter.includes(entry.language));
-
-        //Filtro de Sponsors
-        //Como no estoy recibiendo los sponsors en el arreglo de resultados no lo puedo filtrar por ahora
-        if (!sponsorFilter.includes('CEL')) {
-            results = [];
-        }
-
-        // Filtro de TERMS
-        results = results?.filter((entry) => termFilter.includes(entry.term_name));
-
         $isLoading = false;
     }
 </script>
@@ -61,16 +33,17 @@
         </p>
         {#each results as entry}
             <section class="entry">
-                <h6>{entry.subject_code}: {entry.subject_name}</h6>
+                <h6>{entry.title}</h6>
                 <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
-                    <a class="hover:underline" href="/{entry.learning_object_id}">
+                    <a class="hover:underline" href="{`http://localhost:5173/${entry.id}`}">
                         {entry.unit} - {entry.name}
                     </a>
                 </h5>
                 <p class="font-normal leading-tight text-gray-700 dark:text-gray-400">
                     {entry.objective}
                 </p>
-                <p><b>Autor:</b> {entry.author_last_name}, {entry.author_first_name}</p>
+                <p><b>Autor:</b> {entry.author.join(', ')}</p>
+                <!-- Now contains author names -->
                 <p><Badge border>{entry.year}</Badge></p>
                 <!-- <pre>{JSON.stringify(entry, null, 2)}</pre> -->
             </section>
@@ -88,49 +61,48 @@
             <BreadcrumbItem>Objeto de aprendizaje</BreadcrumbItem>
         </Breadcrumb>
 
-        <span class="mb-1 text-sm">{`${data?.subject_code}: ${data?.subject_name}`}</span>
+        <!-- <span class="mb-1 text-sm">{`${data?.subject_name}`}</span> -->
 
-        <Heading class="mb-2 text-4xl">{`${data.unit} - ${data?.name}`}</Heading>
+        <Heading class="mb-2 text-4xl">{`${data?.unidad} - ${data?.nombre}`}</Heading>
 
         <div class="mb-3 flex gap-x-2.5">
             <Badge border color="red">
                 <ClockSolid class="me-1.5 h-2.5 w-2.5" />
-                {data?.year}
+                {data?.ano}
             </Badge>
-            <Badge border color="dark">{`${data?.subject_name}`}</Badge>
-            {#if data.format}
-                <Badge border color="blue">{data?.format}</Badge>
+            {#if data.formato}
+                <Badge border color="blue">{data?.formato}</Badge>
             {/if}
         </div>
 
         <div class="mb-4 flex gap-x-7">
-            <span class="dark:text-white"><strong>Autor: </strong>{`${data?.first_name} ${data?.last_name}`}</span>
+            <span class="dark:text-white"><strong>Autor: </strong>{`${data.autor}`}</span>
             <span class="dark:text-white"><strong>Per&iacute;odo: </strong>{data.term}</span>
         </div>
 
         <div class="mb-4">
             <Heading tag="h2" class="mb-1 text-2xl">Descripci&oacute;n</Heading>
             <P class="w-4/5">
-                {data?.summary}
+                {data?.descripcion_del_recurso}
             </P>
         </div>
 
         <div class="mb-5">
-            <Badge color="{data?.reusable ? 'green' : 'red'}" rounded class="px-2.5 py-0.5">
-                <Indicator color="{data?.reusable ? 'green' : 'red'}" size="xs" class="me-1" />{data?.reusable
+            <Badge color="{data?.interactivo ? 'green' : 'red'}" rounded class="px-2.5 py-0.5">
+                <Indicator color="{data?.interactivo ? 'green' : 'red'}" size="xs" class="me-1" />{data?.interactivo
                     ? 'Reusable'
                     : 'No reusable'}
             </Badge>
-            <Badge color="{data?.interactive ? 'green' : 'red'}" rounded class="px-2.5 py-0.5">
-                <Indicator color="{data?.interactive ? 'green' : 'red'}" size="xs" class="me-1" />{data?.interactive
+            <Badge color="{data?.interactivo ? 'green' : 'red'}" rounded class="px-2.5 py-0.5">
+                <Indicator color="{data?.interactivo ? 'green' : 'red'}" size="xs" class="me-1" />{data?.interactivo
                     ? 'Interactivo'
                     : 'No es interactivo'}
             </Badge>
-            <Badge color="{data?.has_validation_activities ? 'green' : 'red'}" rounded class="px-2.5 py-0.5">
+            <Badge color="{data?.actividades_de_validacion ? 'green' : 'red'}" rounded class="px-2.5 py-0.5">
                 <Indicator
-                    color="{data?.has_validation_activities ? 'green' : 'red'}"
+                    color="{data?.actividades_de_validacion ? 'green' : 'red'}"
                     size="xs"
-                    class="me-1" />{data?.has_validation_activities
+                    class="me-1" />{data?.actividades_de_validacion
                     ? 'Tiene actividades de validación'
                     : 'No tiene actividades de validación'}
             </Badge>
@@ -150,7 +122,7 @@
             <div>
                 <Heading tag="h3" class="text-xl">Etiquetas</Heading>
                 <div class="mt-3 w-72">
-                    {#each data?.tagsArray as tag}
+                    {#each data?.tags as tag}
                         <Badge border color="dark" class="mb-1 mr-1">{tag}</Badge>
                     {/each}
                 </div>
