@@ -1,24 +1,40 @@
 <script lang="ts">
+    import { onMount } from 'svelte';
+
     import { Checkbox } from 'flowbite-svelte';
 
     import { termFilterStore } from '$stores/term-filter.store';
 
-    // Añado por defecto los dos terms
-    $termFilterStore = [...$termFilterStore, '2022-2023', '2023-2024'];
+    let terms = [];
 
-    function toggleTerm(term: string, event: Event) {
-        let checkbox = event.target as HTMLInputElement;
-        if (checkbox.checked && !$termFilterStore.includes(term)) {
-            $termFilterStore = [...$termFilterStore, term];
-        } else if (!checkbox.checked && $termFilterStore.includes(term)) {
-            $termFilterStore = $termFilterStore.filter((l) => l !== term);
+    const load = async () => {
+        const response = await fetch('http://localhost:8000/wp-json/wp/v2/term_lr?_fields=name,id');
+
+        const data = await response.json();
+
+        terms = data?.map((term) => ({ value: term.id, name: term.name.toLocaleUpperCase() })) ?? [];
+        $termFilterStore = terms.map((term) => String(term.value));
+    };
+    onMount(() => {
+        load();
+    });
+
+    function handleCheckboxChange(event) {
+        const { checked, value } = event.target;
+        if (checked) {
+            $termFilterStore = [...$termFilterStore, value];
+        } else {
+            $termFilterStore = $termFilterStore.filter((term) => term !== value);
         }
     }
 </script>
 
 <section class="filter-content">
-    <Checkbox checked on:change="{(e) => toggleTerm('2022-2023', e)}">2022-2023</Checkbox>
-    <Checkbox checked on:change="{(e) => toggleTerm('2023-2024', e)}">2023-2024</Checkbox>
+    {#each terms as term}
+        <Checkbox value="{term.value}" checked on:change="{handleCheckboxChange}">
+            {term.name}
+        </Checkbox>
+    {/each}
 </section>
 
 <style lang="postcss">
