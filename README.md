@@ -83,7 +83,7 @@ La aplicación está configurada para consumir la API de WordPress desde `http:/
 
 1.  Clona el repositorio:
     ```bash
-    git clone [<URL_DEL_REPOSITORIO>](https://github.com/roguesquid/learning-resources)
+    git clone https://github.com/roguesquid/learning-resources
     cd learning-resources
     ```
 2.  Instala las dependencias:
