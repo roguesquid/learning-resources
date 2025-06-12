@@ -100,16 +100,3 @@ Aquí tienes los comandos que puedes utilizar para desarrollar y construir la ap
     pnpm dev
     ```
 ---
-
-## Contribuciones
-
-¡Las contribuciones son bienvenidas! Si deseas mejorar este proyecto, por favor, sigue estos pasos:
-
-1.  Haz un "fork" de este repositorio.
-2.  Crea una nueva rama para tus cambios (`git checkout -b feature/nueva-funcionalidad`).
-3.  Realiza tus cambios y asegúrate de que el código pase las pruebas de linting y formato (`pnpm lint` y `pnpm format`).
-4.  Haz "commit" de tus cambios (`pnpm commit`).
-5.  Sube tu rama (`git push origin feature/nueva-funcionalidad`).
-6.  Abre un "pull request" explicando tus cambios.
-
----
